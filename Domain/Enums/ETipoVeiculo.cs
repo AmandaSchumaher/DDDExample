@@ -11,5 +11,6 @@ namespace Domain.Enums
         SUV = 1,
         RET = 2,
         SEDAN = 3,
+        UTILITARIO = 4,
     }
 }
