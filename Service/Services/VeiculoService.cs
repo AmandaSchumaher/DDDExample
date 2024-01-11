@@ -1,16 +1,18 @@
 ﻿using Domain.Commands;
 using Domain.Enums;
 using Domain.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Infrastructure.Repository;
 
 namespace Service.Services
 {
     public class VeiculoService : IVeiculoService
     {
+        private readonly IVeiculoRepository _repository;
+
+        public VeiculoService(IVeiculoRepository repository)
+        {
+            _repository = repository;
+        }
         public void GetAsync()
         {
             throw new NotImplementedException();
@@ -30,13 +32,14 @@ namespace Service.Services
             //To do
             //Incluir Somente carros do tipo SUV, Sedan e Hatch 
             if (command.TipoVeiculo != ETipoVeiculo.SUV
-                && command.TipoVeiculo != ETipoVeiculo.RET
-                && command.TipoVeiculo != ETipoVeiculo.SEDAN
+            && command.TipoVeiculo != ETipoVeiculo.RET
+            && command.TipoVeiculo != ETipoVeiculo.SEDAN
             )
                 return "o tipo de veiculo não é permitido";
 
 
-            return _veiculoRepository.PostAsync(command);
+
+            return await _repository.PostAsync(command);
         }
 
         public void PostAsync()
